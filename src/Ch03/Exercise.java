@@ -72,19 +72,35 @@ public class Exercise {
         do {
             int pc = (pl + pr) / 2;
             if (a[pc] == key) {
-                if (pc == 0)
-                    return key;
-                else {
-
-                }
+                int i;
+                for (i = pc - 1; i >= 0; i--)
+                    if (a[i] != key)
+                        return i + 1;
             }
+            else if (a[pc] > key)
+                pr = pc - 1;
+            else
+                pl = pc + 1;
         } while (pl <= pr);
 
         return -1;
     }
 
+    static void Q5() {
+        int[] a = {
+                1, 3, 5, 7, 7, 7, 7, 8, 8, 9, 9,
+        };
+        int idx = binSearchX(a, a.length, 7);
+        System.out.println("idx: " + idx);
+    }
+
+    static void Q7() {
+
+    }
+
     public static void main(String[] args) {
 //        Q2();
 //        Q3();
+//        Q5();
     }
 }
