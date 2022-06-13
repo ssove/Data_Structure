@@ -66,10 +66,6 @@ public class Exercise {
         }
     }
 
-    static void iterativeRecur(int n) {
-        int[]
-    }
-
     static void Q5() {
         Scanner stdIn = new Scanner(System.in);
 
@@ -87,6 +83,6 @@ public class Exercise {
 //        Q1();
 //        Q2();
 //        Q3();
-        Q5();
+//        Q5();
     }
 }
