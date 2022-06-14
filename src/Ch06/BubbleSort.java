@@ -49,20 +49,33 @@ public class BubbleSort {
         int rightBound = n - 1;
 
         while (leftBound < rightBound) {
+            int sorted = 0;
             if (cnt % 2 != 0) {
-                for (int i = rightBound; i > leftBound; i--)
+                for (int i = rightBound; i > leftBound; i--) {
                     if (arr[i] < arr[i - 1]) {
                         swap(arr, i, i - 1);
-                        leftBound = i;
+                        sorted = 1;
                     }
+                    else
+                        sorted++;
+
+                }
+                leftBound += sorted;
             }
             else {
-                for (int i = leftBound; i < rightBound; i++)
-                    if (arr[i] < arr[i + 1]) {
+                for (int i = leftBound; i < rightBound; i++) {
+                    if (arr[i] > arr[i + 1]) {
                         swap(arr, i, i + 1);
-                        rightBound = i;
+                        sorted = 1;
                     }
+                    else
+                        sorted++;
+                }
+                rightBound -= sorted;
             }
+            for (int i = 0; i < n; i++)
+                System.out.printf("%d  ", arr[i]);
+            System.out.printf("%nleftBound: %d, rightBound: %d%n%n", leftBound, rightBound);
             cnt++;
         }
     }
