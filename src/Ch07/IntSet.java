@@ -2,8 +2,6 @@ package Ch07;
 
 import java.util.Arrays;
 
-import static java.lang.Math;
-
 public class IntSet {
     private int max;
     private int num;
@@ -79,7 +77,7 @@ public class IntSet {
             return intersection;
     }
 
-    public boolean leaveIntersection(IntSet s) {
+    public boolean retain(IntSet s) {
         int[] intersection = findIntersection(s);
 
         if (intersection.length == 0)
@@ -90,13 +88,22 @@ public class IntSet {
         return true;
     }
 
-    public boolean diff(IntSet s) {
+    public boolean remove(IntSet s) {
         int[] intersection = findIntersection(s);
 
         if (intersection.length == 0)
             return false;
 
+        int[] newSet = new int[max];
+        int idx = 0;
+        for (int a : set)
+            for (int b : intersection)
+                if (a != b)
+                    newSet[idx++] = a;
 
+        set = newSet;
+
+        return true;
     }
 
     public boolean remove(int n) {
@@ -110,6 +117,36 @@ public class IntSet {
         }
     }
 
+    public boolean isSubsetOf(IntSet s) {
+        for (int e : set)
+            if (!s.contains(e))
+                return false;
+
+        return true;
+    }
+
+    public boolean isProperSubsetOf(IntSet s) {
+        if (!isSubsetOf(s))
+            return false;
+
+        for (int e : s.set)
+            if (indexOf(e) == -1)
+                return true;
+
+        return false;
+    }
+
+    public void intersectionOf(IntSet s1, IntSet s2) {
+        int[] intersection = s1.findIntersection(s2);
+
+        num = copyFrom(intersection);
+    }
+
+    public void differenceOf(IntSet s1, IntSet s2) {
+        s1.remove(s2);
+        copyFrom(s1);
+    }
+
     public void copyTo(IntSet s) {
         int n = Math.min(s.max, num);
         System.arraycopy(set, 0, s.set, 0, n);
@@ -120,6 +157,12 @@ public class IntSet {
         int n = Math.min(s.max, num);
         System.arraycopy(s.set, 0, set, 0, n);
         num = n;
+    }
+
+    public int copyFrom(int[] s) {
+        System.arraycopy(s, 0, set, 0, s.length);
+
+        return s.length;
     }
 
     public boolean equalsTo(IntSet s) {
