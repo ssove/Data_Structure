@@ -180,4 +180,34 @@ public class BinarySearchTree<K, V> {
             break;
         }
     }
+
+    public K getMinKey() {
+        Node<K, V> cur = root;
+
+        while (cur.left != null)
+            cur = cur.left;
+
+        return cur.key;
+    }
+
+    public V getValueWithMinKey() {
+        K key = getMinKey();
+
+        return search(key);
+    }
+
+    public K getMaxKey() {
+        Node<K, V> cur = root;
+
+        while (cur.right != null)
+            cur = cur.right;
+
+        return cur.key;
+    }
+
+    public V getValueWithMaxKey() {
+        K key = getMaxKey();
+
+        return search(key);
+    }
 }
